@@ -6,9 +6,10 @@ class ScriptTest < Test::Unit::TestCase
   def setup
     url = ENV['URL'].nil? ? '' : ENV["URL"]
     token = ENV['TOKEN'].nil? ? '' : ENV["TOKEN"]
-    reviewer = ENV['REVIEWER']
+    reviewer = ENV['REVIEWER'].nil? ? '' : ENV["REVIEWER"]
     @secrets_token = ENV['SECRETS_TOKEN']
     @obj = GithubApi.new(url, token)
+    @reviewers = GithubApi.new(reviewer)
   end
 
   def test_health_check
