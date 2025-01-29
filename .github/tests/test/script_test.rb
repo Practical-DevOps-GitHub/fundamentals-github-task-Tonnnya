@@ -55,7 +55,9 @@ class ScriptTest < Test::Unit::TestCase
   end
 
   def test_codeowners_contains_user
-    user_name = 'softservedata'
+    reviewer = ENV['REVIEWER'].nil? ? '' : ENV["REVIEWER"]
+    user_name = reviewer 
+    #'softservedata'
     content = @obj.file_branch('CODEOWNERS', 'main') || @obj.file_branch('.github/CODEOWNERS', 'main') || @obj.file_branch('docs/CODEOWNERS', 'main')
     assert_not_nil(content, 'File CODEOWNERS doesn\'t exist on main branch')
     assert(content.include?(user_name), "User #{user_name} doesn't present in CODEOWNERS")
