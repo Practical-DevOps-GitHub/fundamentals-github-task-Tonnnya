@@ -6,7 +6,7 @@ class ScriptTest < Test::Unit::TestCase
   def setup
     url = ENV['URL'].nil? ? '' : ENV["URL"]
     token = ENV['TOKEN'].nil? ? '' : ENV["TOKEN"]
-    reviewer = ENV['REVIEWER'].nil? ? '' : ENV["REVIEWER"]
+   
     @secrets_token = ENV['SECRETS_TOKEN']
     @obj = GithubApi.new(url, token)
   end
@@ -100,6 +100,7 @@ class ScriptTest < Test::Unit::TestCase
 
   def test_approve_from_user
     user_name = 'online-marathon'
+     reviewer = ENV['REVIEWER'].nil? ? '' : ENV["REVIEWER"]
     puts "Token: #{reviewer}"
     classic_require_code_owner_review = @obj.rules_required_pull_request_reviews('main').nil? || @obj.rules_required_pull_request_reviews('develop')["require_code_owner_reviews"]
     pull_request_rulesets_rules = @obj.get_branch_ruleset('main')
