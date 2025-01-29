@@ -59,6 +59,7 @@ jobs:
         env:
           URL: ${{ github.repository }}
           TOKEN: ${{ steps.my-app.outputs.token }}
+          REVIEWER: ${{ vars.REVIEWER }}
         working-directory: '.github/tests'
         run: 
           ruby test/script_test.rb
