@@ -9,7 +9,6 @@ class ScriptTest < Test::Unit::TestCase
     reviewer = ENV['REVIEWER'].nil? ? '' : ENV["REVIEWER"]
     @secrets_token = ENV['SECRETS_TOKEN']
     @obj = GithubApi.new(url, token)
-    @reviewers = GithubApi.new(reviewer)
   end
 
   def test_health_check
