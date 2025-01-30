@@ -100,17 +100,12 @@ class ScriptTest < Test::Unit::TestCase
   end
 
   def test_approve_from_user
-    @user_name = "online-marathon"
-    puts @user_name
-    classic_require_code_owner_review = @obj.rules_required_pull_request_reviews('main').nil? || @obj.rules_required_pull_request_reviews('develop')["require_code_owner_reviews"]
-    puts @user_name
+    user_name = "online-marathon"
+    classic_require_code_owner_review = @obj.rules_required_pull_request_reviews('main').nil? || @obj.rules_required_pull_request_reviews('main')["require_code_owner_reviews"]
     pull_request_rulesets_rules = @obj.get_branch_ruleset('main')
-    puts @user_name
     rulesets_require_code_owner_review = pull_request_rulesets_rules&.find { |rule| rule['type'] == 'pull_request' }&.[]('parameters')&.[]('require_code_owner_review')
-    puts @user_name
-    assert_not_nil(classic_require_code_owner_review || rulesets_require_code_owner_review, "We should not allow merge to main branch without approve from #{@user_name}")
-    puts @user_name
-  end
+    assert_not_nil(classic_require_code_owner_review || rulesets_require_code_owner_review, "ERROR! We should not allow merge to main branch without approve from #{user_name}")
+    end
 
   def test_PR_template_present
     actual = @obj.file_branch('.github/pull_request_template.md', 'main')
